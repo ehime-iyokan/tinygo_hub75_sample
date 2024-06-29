@@ -210,6 +210,7 @@ func (d *Device) Display() error {
 
 func (d *Device) latch(showTime uint16) {
 	d.lat.High()
+	time.Sleep(1 * time.Microsecond)
 	d.lat.Low()
 	d.oe.Low()
 	time.Sleep(time.Duration(showTime) * time.Microsecond)
