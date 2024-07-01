@@ -165,7 +165,7 @@ func (d *Device) fillMatrixBuffer(x int16, y int16, r uint8, g uint8, b uint8) {
 		if r > colorTresh {
 			d.buffer[c][offsetR] |= 1 << bitSelect
 		} else {
-			d.buffer[c][offsetR] = d.buffer[c][offsetR] &^ 1 << bitSelect
+			d.buffer[c][offsetR] &^= 1 << bitSelect
 		}
 		if g > colorTresh {
 			d.buffer[(c+d.colorThirdStep)%d.colorDepth][offsetG] |= 1 << bitSelect
@@ -299,8 +299,8 @@ func main() {
 	w, h := h75.Size()
 	for y := int16(0); y < h; y++ {
 		for x := int16(0); x < w; x++ {
-			v := y % 3
-			// v := x % 3
+			// v := y % 3
+			v := x % 3
 			if v == 0 {
 				h75.SetPixel(x, y, color.RGBA{R: 0xFF, G: 0x00, B: 0x00, A: 0xFF})
 			} else if v == 1 {
