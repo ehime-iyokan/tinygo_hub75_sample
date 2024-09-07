@@ -210,7 +210,6 @@ func (d *Device) Display() error {
 
 func (d *Device) latch(showTime uint16) {
 	d.lat.High()
-	time.Sleep(1 * time.Microsecond)
 	d.lat.Low()
 	d.oe.Low()
 	time.Sleep(time.Duration(showTime) * time.Microsecond)
@@ -277,14 +276,14 @@ func main() {
 		SDO: machine.SPI0_SDO_PIN,
 		SDI: machine.SPI0_SDI_PIN,
 	})
+	time.Sleep(500 * time.Millisecond)
 
-	latPin := machine.GPIO10
-	oePin := machine.GPIO11
-	aPin := machine.GPIO12
-	bPin := machine.GPIO13
-	cPin := machine.GPIO14
-	dPin := machine.GPIO15
-
+	latPin := machine.D1
+	oePin := machine.D2
+	aPin := machine.D3
+	bPin := machine.D4
+	cPin := machine.D5
+	dPin := machine.D6
 	h75 := New(spi, latPin, oePin, aPin, bPin, cPin, dPin)
 	h75_config := Config{
 		Width:  64,
